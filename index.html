@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <title>Cosmic Monkey Sounds</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,327 +10,73 @@
     <!-- W3.CSS Framework + Fonts & Icons -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Main CSS -->
     <link rel="stylesheet" type="text/css" href="styles.css">
 
-    <!-- Janky JQuery knob (soon to be implemented purely in canvas) -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="DemoInterfaceCanvas0.3.2/jqInterface.js"></script>
+    <script src="p5.min.js"></script>
 
-    <!-- Uses W3.CSS framework to change CSS -->
-    <script type="text/javascript" src="cssEventHandler.js"></script>
+    <!-- <script src="banner.js"></script> -->
+    <script src="MainScene/Main_p5.js"></script>
+    <script src="MainScene/BG_Star.js"></script>
+    <script src="MainScene/Star.js"></script>
+    <script src="MainScene/GravityMass.js"></script>
 
 </head>
 
 <body>
 
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-    <!------------------- Navbar (sits on top) --------------------->
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
+    <div id="cosmic-banner"></div> 
 
-    <div class="w3-top">
+<!--     
+    <div class="w3-row w3-padding-64">
 
-        <!-- Navbar panel -->
-        <div class="w3-bar" id="myNavbar">
-            <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);"
-                onclick="toggleFunction()" title="Toggle Navigation Menu">
-                <i class="fa fa-bars"></i>
-            </a>
-            <a href="#booffer" class="w3-bar-item w3-button w3-hide-small"> BOOFFER BUSTER</a>
-            <a href="#demo" class="w3-bar-item w3-button w3-hide-small"> INTERACTIVE DEMO</a>
+        <div class="w3-col w3-container m6 l4 w3-center w3-padding-16">   
+        
+            <img src="./Photos/calc3.jpg" alt="thing" style="max-width: 100%; max-height: 400px" >
+            <div class="w3-container w3-center">
+                <p>What is this?</p>
+            </div>
+        
         </div>
 
-        <!-- Navbar adjustments for small screens (cssEventHandler.js)-->
-        <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-            <a href="#booffer" class="w3-bar-item w3-button" onclick="toggleFunction()">BOOFFER BUSTER</a>
-            <a href="#demo" class="w3-bar-item w3-button" onclick="toggleFunction()">INTERACTIVE DEMO</a>
+        <div class="w3-col w3-container m6 l4 w3-center w3-padding-16">
+        
+            <img src="./Photos/calc2.jpg" alt="thing" style="max-width: 100%; max-height: 400px">
+            <div class="w3-container w3-center">
+                <p>What a piece of shit!</p>
+            </div>
+        
+        </div>
+
+        <div class="w3-col w3-container m6 l4 w3-center w3-padding-16">
+        
+            <img src="./Photos/boofer.jpg" alt="thing" style="max-width: 100%; max-height: 400px">
+            <div class="w3-container w3-center">
+                <p>See, when Colleen does it, it's nice.</p>
+            </div>
+    
         </div>
 
     </div>
 
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-    <!-------------------------- Header ---------------------------->
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
+    <footer class="w3-center w3-black w3-padding-32 w3-hover-opacity-off">
 
-    <header class="w3-display-container w3-content w3-wide w3-center" style="max-width:1600px;min-width:500px" id="home">
-        <!-- Logo -->
-        <img class="w3-image" src="http://cosmicmonkeysounds.com/CosmicLogo.png" alt="Cosmic Monkey" width="1600"
-            height="800">
-    </header>
-
-    <!-------------------------------------------------------------->
-    <!------------------------- Tagline ---------------------------->
-    <!-------------------------------------------------------------->
-
-    <h3 class="tagline w3-center w3-padding-xlarge">
-        Along the sleepy shores of Halifax, Nova Scotia,
-        solder smoke and rauccous noise waft freely
-        through the salty air as neurons and electrons
-        collide to create handmade effects pedals.
-    </h3>
-
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-    <!------------------- Booffer Buster Section ------------------->
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-
-    <section class="section" id="booffer">
-
-        <!-- Red "Meet:" bar-->
-        <!-- HEY! Should be rgb(194,30,12) -->
-        <div class="banner-colors meet w3-content w3-center" style="background-color:rgb(194,30,12)">
-            <h2><i>Meet:</i></h2>
-            <h1><b>Booffer Buster</b> </h1>
-            <h4><i>Discrete, Class-A Buffer & Booster</i></h4>
-        </div>
-
-        <!-- Booffer Buster grid container -->
-        <div class="w3-container w3-content">
-            <div class="w3-row-padding">
-
-                <!-------------------------------------------------->
-                <!----------------- Right side --------------------->
-                <!-------------------------------------------------->
-
-                <div class="w3-right w3-col m6 w3-padding-32">
-
-                    <!--------------- Image slider ----------------->
-                    <!---------------------------------------------->
-
-                    <div class="w3-image">
-                        <img src="http://cosmicmonkeysounds.com/DemoInterfaceCanvas0.3/boofferinterface/background.png"
-                            alt="boofer" style="max-width: 600px">
-                    </div>
-
-                    <!---------------------------------------------->
-                    <!----------- Detailed info section ------------>
-                    <!---------------------------------------------->
-
-
-                    <!-- Controls button -->
-                    <button onclick="accShow('booffer-controls')" class="w3-btn-block">
-                        Controls</button>
-
-                    <!-- Specs button -->
-                    <button onclick="accShow('booffer-specs')" class="w3-btn-block">
-                        Specs</button>
-
-                    <!-------------- Extra info text -------------->
-                    <!--------------------------------------------->
-
-                    <div class="w3-container booffer-in-depth ">
-
-                        <!-- Controls text -->
-                        <div id="booffer-controls" class="w3-hide w3-left-align w3-bordered w3-border">
-
-                            <table class="w3-table w3-padding-medium">
-
-                                <tr>
-                                    <th>VOL:</th>
-                                    <th>HI/LO:</th>
-                                    <th>TONE:</th>
-                                </tr>
-
-                                <tr>
-                                    <td><i>Master volume control</i></td>
-
-                                    <td><i>Selects gain range of the boost circuit.</i><br><br>
-                                        <b>Down:</b> Clean<br>
-                                        <b>Up:</b> Dirty
-                                    </td>
-
-                                    <td>
-                                        <i>Passive low pass tone control on boost output.</i><br><br>
-                                        <b><i>[A]: 3-way toggle</i></b><br>
-                                        <b>Up:</b> Flat<br>
-                                        <b>Middle:</b> Slight cut<br>
-                                        <b>Down:</b> Aggressive cut<br><br>
-
-                                        <b><i>[B]: Potentiometer</i></b><br>
-                                        <i></i>
-
-                                    </td>
-                                <tr>
-                            </table>
-                        </div>
-
-                    </div>
-
-                    <!-- Specs text -->
-                    <div id="booffer-specs" class="w3-hide w3-bordered w3-border">
-
-                        <table class="w3-table w3-padding-medium">
-
-                            <tr>
-                                <td><i>Current consumption:</i></td>
-                                <td> <b>~8mA</b> </td>
-                            <tr>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-                <!-------------------------------------------------->
-                <!------------------- Left side -------------------->
-                <!-------------------------------------------------->
-
-               
-                    <div class="w3-col m6 w3-card w3-left-align" style="margin-top: 31px; max-width: 600px;">
-                        <h5><i><b>
-                                    Compact, yet mighty; ready to push your amp to 11 and beyond, while providing
-                                    sublime,
-                                    always-on buffering to maintain and cleanse your signal.
-                                </b></i></h5>
-                        <p>
-                            The Booffer Buster is a swiss army
-                            knife for musicians needing good preamplification,
-                            buffering, clean and dirty boosting, or all of the above! <br><br>
-                            With a buffer circuit channeling Pete Cornish, featuring a low noise floor and active
-                            RF
-                            filtering
-                            to ensure signal integrity, the Booffer Buster can save your tone from any kind of loss
-                            accosciated
-                            with long cable runs, funky sound sources and/or strange pedal chains.<br><br>
-                    
-                            The boost circuit is true bypass switchable post-buffer, and is modelled after classic
-                            tube
-                            power
-                            amp designs using JFET emulation. The result is an nearly-transparent boost (with a
-                            hint of
-                            compression) on low gain settings,
-                            and sutble, but rich overdrive on high gain settings.</p>
-                        <h3 style="text-align: center"><i><b>$100 USD + S/H</b></i></h3>
-                        <h6 style="text-align: center"><i>For info on ordering, please email: cosmicmonkeysounds@gmail.com</i></h6>
-                    </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-    <!-------------------- Interactive demo ------------------------>
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-
-    <section>
-
-        <!-- Banner -->
-        <h1 class="banner-colors w3-center">
-            <b>Interactive Pedal Demo V_0.3</b>
-        </h1>
-
-        <!-- Container -->
-        <div class="w3-container w3-content" id="demo">
-            <div class="w3-row-padding" style="margin-top: 10px;">
-
-                <!-------------- Canvas UI ------------------------>
-                <!------------------------------------------------->
-                <div class="w3-col m6 w3-padding-medium w3-border-light-grey">
-
-                    <div style="display: flex;">
-
-                        <div>
-                            <canvas id="boofferCanvas" width="450" height="450" style='border:1px solid #000000;'></canvas>
-                        </div>
-
-                        <div class="jq-dial">
-                            <input type="text" value="0" class="dial" data-angleOffset="-125" data-angleArc="250"
-                                data-rotation="clockwise" data-step="1">
-                        </div>
-                    </div>
-                </div>
-
-                <!--------------- Clip Table UI ------------------->
-                <!------------------------------------------------->
-                <div class="w3-col m6 w3-padding-medium w3-border-light-grey" style="max-width: 480px">
-
-
-                    <table id="players" class="clip-table w3-table-all w3-card">
-                        <tr>
-                            <th>Clip description</th>
-                            <th>Instrument</th>
-                            <th>Amp</th>
-                            <th>Effects</th>
-                            <th>Musician</th>
-                        </tr>
-
-                        <tr>
-                            <td class="w3-border-light-grey w3-hover-opacity"><i><b onclick='clipSelect(0)'>Sir Sexy Psycho</b></i></td>
-                            <td>Squier CV Tele [M]</td>
-                            <td>Traynor YCS90</td>
-                            <td>Spring reverb</td>
-                            <td>Seth Voliere</td>
-                        </tr>
-
-                        <tr>
-                            <td class="w3-border-light-grey w3-hover-opacity"><i><b onclick="clipSelect(1)">Oy Vey Malmsteen</b></i></td>
-                            <td>PRS SE Custom 24 [M]</td>
-                            <td>""</td>
-                            <td>""</td>
-                            <td>TJ Ploughman</td>
-                        </tr>
-
-                        <tr>
-                            <td class="w3-border-light-grey w3-hover-opacity"><i><b onclick="clipSelect(2)">"Ironic" Dad Chords</b></i></td>
-                            <td>Sterling JP60 [N]</td>
-                            <td>""</td>
-                            <td>""</td>
-                            <td>John Janigan-Mills</td>
-                        </tr>
-                    </table>
-
-                    <!-- Play, pause, message -->
-                    <div class="w3-left-align">
-                        <div style="margin-top: 5px">
-                            <p><i>Audio is uncompressed and unprocessed; crank it up!</i></p>
-                        </div>
-                        <img src="http://cosmicmonkeysounds.com/DemoInterfaceCanvas0.3/Pause.png" id="play" width="30px"
-                            onclick="playButton();">
-                        <input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01"
-                            onchange="adjustVolume()">
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </section>
-
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-    <!-------------------------- Footer ---------------------------->
-    <!-------------------------------------------------------------->
-    <!-------------------------------------------------------------->
-
-    <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
-        <!-- "To the top" button -->
-        <a href="#home" class="w3-button w3-light-grey">
-            <i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+        <a href="#home" class="w3-button w3-white">
+        <i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+        
         <div class="w3-xlarge w3-section">
-            <!-- Social media tags -->
             <i class="fa fa-facebook-official w3-hover-opacity"></i>
             <i class="fa fa-instagram w3-hover-opacity"></i>
             <i class="fa fa-youtube w3-hover-opacity"></i>
             <i class="fa fa-github w3-hover-opacity"></i>
         </div>
-        <!-- Final footnote -->
-        <p>Built by John Janigan-Mills, 2018</p>
-    </footer>
 
+        <p>Built by John Janigan-Mills, 2020</p>
 
-    <!-- Main.js -->
-    <script type="text/javascript" src="DemoInterfaceCanvas0.3.2/main.js"></script>
+    </footer> -->
 
 </body>
 
