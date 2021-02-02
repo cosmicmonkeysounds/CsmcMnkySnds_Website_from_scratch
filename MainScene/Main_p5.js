@@ -5,6 +5,7 @@ let canvas, ctx, monkeyFace, monkeyBrain, monkeyFlame;
 let scrollPos;
 let centerGravity, mouseGravity; 
 let cosmicText;
+let pluginText;
 
 function setup() 
 {
@@ -20,6 +21,8 @@ function setup()
     mouseGravity  = new GravityMass(0.05, 0.05, mouseX, mouseY);
 
     cosmicText = new CosmicText;
+    pluginText = new Text;
+    pluginText.setText("PLUGINS");
 
     scrollPos = -1;
 
@@ -67,6 +70,17 @@ function mouseWheel(event)
     return false;
 }
 
+function mousePressed()
+{
+    console.log("main mouse pressed");
+    pluginText.pressed();
+}
+
+function mouseMoved()
+{
+    pluginText.hover();
+}
+
 // p5 main loop
 function draw() 
 {
@@ -89,5 +103,14 @@ function draw()
     // image( monkeyFlame, (width/2) - 520, -44 );
 
     cosmicText.draw();
+    pluginText.draw();
+
+    // fill(255).strokeWeight(10);
+    // textSize( 50 );
+    // textAlign(CENTER);
+    // textFont('Bebas Neue');
+    // textStyle(BOLD);
+    // //position(0,0);
+    // text('PLUGINS', windowWidth/2, windowHeight/2);
 
 }

@@ -17,8 +17,7 @@ class CosmicText
     {
         if( -scrollPos < 450 )
         {
-            fill(255)
-            .strokeWeight(10);
+            fill(255).strokeWeight(10);
             textSize( this.size() );
             textAlign(CENTER);
             textFont('Bebas Neue');
