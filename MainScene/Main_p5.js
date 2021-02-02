@@ -4,10 +4,11 @@ let backgroundStars = []
 let canvas, ctx, monkeyFace, monkeyBrain, monkeyFlame; 
 let scrollPos;
 let centerGravity, mouseGravity; 
+let cosmicText;
 
 function setup() 
 {
-    canvas = createCanvas( displayWidth, displayHeight );
+    canvas = createCanvas( windowWidth, windowHeight );
    
     // attaches canvas to a .div in the HTML
     canvas.parent( 'cosmic-banner' );
@@ -16,9 +17,11 @@ function setup()
     // monkeyBrain = loadImage('Photos/MonkeyBrain.png');
     // monkeyFlame = loadImage('Photos/MonkeyFlame.png');
 
-    mouseGravity  = new GravityMass(0.05, 0.1, mouseX, mouseY);
+    mouseGravity  = new GravityMass(0.05, 0.05, mouseX, mouseY);
 
-    scrollPos = 0;
+    cosmicText = new CosmicText;
+
+    scrollPos = -1;
 
     for( let i = 0; i < 150; i++ )
     {
@@ -33,30 +36,38 @@ function setup()
     sortStars();
 }
 
+// compares and sorts stars based on the magnitude of their distances,
+// which is their brightness and diameter multiplied together. 
 function sortStars()
 {
     starArray = Array.from(starSet).sort( function(a, b)
     {
         return a.distance().mag() - b.distance().mag();
     });
-    //console.log(starArray);
 }
 
+// p5 function
 function windowResized() 
 {
-    resizeCanvas( displayWidth, displayHeight );
+    resizeCanvas( windowWidth, windowHeight );
 }
 
+// p5 function
 function mouseWheel(event)
 {
-    if( scrollPos + event.deltaY < 0 || scrollPos + event.deltaY > 5000 ){
+    if( scrollPos + event.deltaY < 0 || scrollPos + event.deltaY > 5000 )
+    {
         scrollPos += event.deltaY;
         for( let s of starSet )
             s.velocity.y += event.deltaY / (s.distance().mag() * random(0, 10));
     }
+
+
+    // this makes it so the window doesn't scroll, thus making sure only the scrollPos variable is updated.
+    return false;
 }
 
-
+// p5 main loop
 function draw() 
 {
     background(10);
@@ -77,13 +88,6 @@ function draw()
     // image( monkeyBrain, (width/2) - 520, -45 );
     // image( monkeyFlame, (width/2) - 520, -44 );
 
-    fill(255)
-        .strokeWeight(10);
-    textSize(150 / -scrollPos );
-    textAlign(CENTER);
-    textFont('Bebas Neue');
-    textStyle(BOLD);
-    //position(0,0);
-    text('COSMIC MONKEY SOUNDS', width/2, 130);
+    cosmicText.draw();
 
 }

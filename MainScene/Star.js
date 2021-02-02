@@ -1,7 +1,10 @@
 class Star 
 {
-    constructor()
+    constructor(index)
     {
+
+        this.index = index;
+
         this.currentCoords     = createVector( random(0, width), random(0, height) );
         this.velocity          = createVector( random(-2, 2), random(-2, 2) );
         this.acceleration      = createVector( random(-1, 1), random(-1, 1) );
@@ -23,16 +26,6 @@ class Star
 
         this.rotationAngle     = random( 0.1, 10 );
         this.rotationIncrement = random(100, 1000);
-
-        this.framesAlive       = 0;
-
-        this.supernovaIncrement = 10;
-        this.alive = false;
-
-        for( let i = 0; i < 10; i++ )
-        {
-            this.supernova();
-        }
 
     }
 
@@ -60,49 +53,21 @@ class Star
         endShape(CLOSE);
     }
 
-    supernova()
-    {
-        noStroke();
-        fill(255, 255, 255, this.supernovaIncrement );
-        ellipse(this.currentCoords.x, this.currentCoords.y, this.diameter / this.supernovaIncrement, this.diameter / this.supernovaIncrement );
-        this.supernovaIncrement--;
-
-        if( this.supernovaIncrement == 0 )
-        {
-            this.alive = !this.alive;
-        }
-    }
-
     drawShape() 
     {
-        //translate(p5.Vector.fromAngle(millis() / 1000, 1));
+
         push();
+
         translate( this.currentCoords.x, this.currentCoords.y );
         rotate( (frameCount * this.diameter) /  this.rotationIncrement );
 
-        //console.log(this.alive);
-
-        if( this.alive = false )
-        {
-            for( let i = 10; i < 0; i-- )
-            {
-                this.supernova();
-            }
-        }
-
-        else
-        {
-            noStroke();
-            fill( this.colour );
-            this.starShape();
-        }
+        noStroke();
+        fill( this.colour );
+        this.starShape();
 
         pop();
 
-        this.framesAlive++;
-
         this.calculateNextPosition();
-        //console.log(mouseX, mouseY);
     }
 
     calculateNextPosition()
